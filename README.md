@@ -1,2 +1,2 @@
 # pyGo
-Practice Python
+A playground for practicing Python.
