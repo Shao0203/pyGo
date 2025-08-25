@@ -1,6 +1,6 @@
 def get_city_country(city, country, population=0):
+    city_country = f'{city}, {country}'.title()
     if population:
-        city_country = f'{city.title()}, {country.title()} - population {population}'
+        return f'{city_country} - population {population}'
     else:
-        city_country = f'{city.title()}, {country.title()}'
-    return city_country
+        return city_country

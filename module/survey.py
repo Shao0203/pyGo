@@ -6,8 +6,8 @@ class AnonymousSurvey:
     def show_question(self):
         print(self.question)
 
-    def store_response(self, response):
-        self.responses.append(response)
+    def store_response(self, new_response):
+        self.responses.append(new_response)
 
     def show_results(self):
         print('Survey results:')

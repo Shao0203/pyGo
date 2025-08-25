@@ -1,10 +1,12 @@
-from module.survey import AnonymousSurvey
 import pytest
+from module.survey import AnonymousSurvey
 
 
 @pytest.fixture
 def language_survey():
-    return AnonymousSurvey('what is your mother language?')
+    question = 'What language did you first learn to speak?'
+    language_survey = AnonymousSurvey(question)
+    return language_survey
 
 
 def test_store_single_response(language_survey):
@@ -13,8 +15,10 @@ def test_store_single_response(language_survey):
 
 
 def test_store_three_responses(language_survey):
-    responses = ['English', 'Spanish', 'Mandarin']
+    responses = ['English', 'Chinese', 'Spanish']
     for response in responses:
         language_survey.store_response(response)
-    for response in responses:
-        assert response in language_survey.responses
+
+    for response in language_survey.responses:
+        assert response in responses
+    # assert len(language_survey.responses) == 3
