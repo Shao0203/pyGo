@@ -1,7 +1,9 @@
 import pytest
+import unittest
 from module.school import Classroom, Teacher, Student, TooManyStudents
 
 
+# ====================pytest函数模式====================
 # --- Fixtures ---
 @pytest.fixture
 def hogwarts_classroom():
@@ -62,3 +64,57 @@ def test_param_fixture_add_student(hogwarts_classroom, gryffindor_student):
 def test_course_name(hogwarts_classroom):
     """测试课程名字（用 mark 举例，可选 slow tests）"""
     assert hogwarts_classroom.course == "Defense Against the Dark Arts"
+
+
+# ====================pytest类模式====================
+@pytest.fixture
+def classroom():
+    teacher = Teacher("Dumbledore", age=150)
+    students = [Student("Harry"), Student("Hermione")]
+    return Classroom(teacher, students, "Defense Against the Dark Arts")
+
+
+class TestClassroom1:
+
+    def test_add_student_1(self, classroom):
+        new_student = Student("Ron")
+        classroom.add_student(new_student)
+        assert any(s.name == "Ron" for s in classroom.students)
+
+    def test_add_too_many_students_1(self, classroom):
+        for i in range(8):
+            classroom.add_student(Student(f"Student{i}"))
+
+        with pytest.raises(TooManyStudents):
+            classroom.add_student(Student("Overflow"))
+
+    def test_change_teacher_1(self, classroom):
+        new_teacher = Teacher("Snape")
+        classroom.change_teacher(new_teacher)
+        assert classroom.teacher.name == "Snape"
+
+
+# ====================unittest模式====================
+class TestClassroom2(unittest.TestCase):
+
+    def setUp(self):
+        teacher = Teacher("Dumbledore", age=150)
+        students = [Student("Harry"), Student("Hermione")]
+        self.classroom = Classroom(
+            teacher, students, "Defense Against the Dark Arts")
+
+    def test_add_student_2(self):
+        new_student = Student("Ron")
+        self.classroom.add_student(new_student)
+        self.assertTrue(any(s.name == "Ron" for s in self.classroom.students))
+
+    def test_add_too_many_students_2(self):
+        for i in range(8):
+            self.classroom.add_student(Student(f"Student{i}"))
+        with self.assertRaises(TooManyStudents):
+            self.classroom.add_student(Student("Overflow"))
+
+    def test_change_teacher_2(self):
+        new_teacher = Teacher("Snape")
+        self.classroom.change_teacher(new_teacher)
+        self.assertEqual(self.classroom.teacher.name, "Snape")
