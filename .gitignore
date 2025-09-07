@@ -5,7 +5,6 @@ __pycache__/
 .DS_Store
 .vscode/
 config.py
-backup.py
 
 # C extensions
 *.so
