@@ -786,8 +786,21 @@ for question in questions:
 
 
 # ----------11_09 Working with PDF
-# pip3 install pypdf2
-import PyPDF2
+# pip install pypdf
+from pypdf import PdfReader, PdfWriter
+
+reader = PdfReader("input.pdf")
+writer = PdfWriter()
+
+for page in reader.pages:
+    writer.add_page(page)
+
+with open("output.pdf", "wb") as f:
+    writer.write(f)
+
+
+# pip3 install pypdf2   # 老api 已经淘汰
+import PyPDF2   
 
 with open('pdf/dummy.pdf', 'rb') as file:
     reader = PyPDF2.PdfReader(file)
@@ -1059,4 +1072,3 @@ if __name__ == "__main__":
     # 模拟请求：查看单篇文章
     print("\n=== 单篇文章 ===")
     print(controller.show_post(1))
-
