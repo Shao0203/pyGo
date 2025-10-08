@@ -81,19 +81,39 @@
 #         break
 
 
-# 4. 斐波那契数列 Fibonacci sequence
+# # 4. 斐波那契数列 Fibonacci sequence
+# # 4.1
+# def fibonacci(num):
+#     fib_nums = []
+#     a, b = 0, 1
+#     for _ in range(num):
+#         fib_nums.append(a)
+#         a, b = b, a + b
+#     return fib_nums
 
-def fabonacci(num):
-    fab_nums = []
-    a, b = 0, 1
-    for i in range(0, num):
-        fab_nums.append(a)
-        a, b = b, a + b
-    return fab_nums
+
+# print(fibonacci(1))
+# print(fibonacci(5))
+# print(fibonacci(10))
+
+# # 4.2
+# def fibonacci(n):
+#     """
+#     返回第n个斐波那契数
+#     约定: F(0)=0, F(1)=1, F(2)=1, ...
+#     """
+#     if n == 0:
+#         return 0
+#     elif n == 1:
+#         return 1
+#     else:
+#         return fibonacci(n-1) + fibonacci(n-2)
 
 
-print(fabonacci(1))
-print(fabonacci(5))
-print(fabonacci(8))
-print(fabonacci(10))
-print(fabonacci(15))
+# print(fibonacci(9))
+
+# 4.3
+# a, b = 0, 1
+# for _ in range(20):
+#     print(a)
+#     a, b = b, a + b
