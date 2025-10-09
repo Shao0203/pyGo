@@ -117,3 +117,43 @@
 # for _ in range(20):
 #     print(a)
 #     a, b = b, a + b
+
+
+# # 5. 寻找水仙花数narcissistic number,: 153 = 1**3+5**3+3**3, 1634 = 1**4+6**4+3**4+4**4
+# 拆分一个数的小技巧 百位: num // 100  十位: num % 100 // 10   个位数: num % 10
+# for num in range(100, 1000):
+#     high = num // 100
+#     mid = num % 100 // 10
+#     low = num % 10
+#     if num == high**3 + mid**3 + low**3:
+#         print(num)
+
+
+# # 6. 数字反转: 12389 -> 98321
+# # num		reversed_num
+# # 12389	0
+# # 1238 	0*10 + 9 = 9
+# # 123 	9*10 + 8 = 98
+# # 12 		98*10 + 3 = 983
+# # 1 		983*10 + 2 = 9832
+# # 0 		9832*10 + 1 = 98321
+# num = int(input('num = '))
+# reversed_num = 0
+# while num > 0:
+#     reversed_num = reversed_num * 10 + num % 10
+#     num = num // 10
+# print(reversed_num)
+
+
+# # 7. 百钱百鸡问题
+# for x in range(0, 21):
+#     for y in range(0, 34):
+#         for z in range(0, 100, 3):
+#             if x + y + z == 100 and 5 * x + 3 * y + z // 3 == 100:
+#                 print(f'公鸡: {x}只, 母鸡: {y}只, 小鸡: {z}只')
+
+# for x in range(0, 21):
+#     for y in range(0, 34):
+#         z = 100 - x - y
+#         if z % 3 == 0 and 5 * x + 3 * y + z // 3 == 100:
+#             print(f'公鸡: {x}只, 母鸡: {y}只, 小鸡: {z}只')
