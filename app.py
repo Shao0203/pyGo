@@ -1,4 +1,4 @@
-# import random
+import random
 
 
 # # # 1. 素数
@@ -157,3 +157,60 @@
 #         z = 100 - x - y
 #         if z % 3 == 0 and 5 * x + 3 * y + z // 3 == 100:
 #             print(f'公鸡: {x}只, 母鸡: {y}只, 小鸡: {z}只')
+
+
+# # 8. 6面色子掷6000次，记录每面多少次
+# import random
+
+# counters = [0] * 6
+# for _ in range(6000):
+#     face = random.randrange(1, 7)
+#     counters[face - 1] += 1
+# for face in range(1, 7):
+#     print(f'{face}出现的次数是{counters[face-1]}次;')
+# print(f'一共抛了{sum(counters)}次色子。')
+
+
+# # 9. 构造一个字典，用zip方式
+# item1 = dict(zip('abcdefg', list(range(1, 8))))
+# print(item1)
+# item2 = dict(zip('abcdefg', '1234567'))
+# print(item2)
+# item2 = {x: x**3 for x in range(1, 6)}
+# print(item2)
+
+
+# # 10. 查找一句话中每个字母出现字数，从高到低排序
+# message = 'Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.'
+# counter = {}
+# for letter in message:
+#     if 'A' <= letter <= 'Z' or 'a' <= letter <= 'z':
+#         counter[letter] = counter.get(letter, 0) + 1
+# # sorted_keys = sorted(counter, key=counter.get, reverse=True)
+# # print(sorted_keys)
+# # for key in sorted_keys:
+# #     print(f'{key} 出现了 {counter[key]} 次.')
+# result = sorted(counter.items(), reverse=True, key=lambda item: item[1])
+# print(result)
+# print(dict(result))
+
+
+# # 11. 股票排序筛选高价
+# stocks = {
+#     'AAPL': 191.88,
+#     'GOOG': 1186.96,
+#     'IBM': 149.24,
+#     'ORCL': 48.44,
+#     'ACN': 166.89,
+#     'FB': 208.09,
+#     'SYMC': 21.29
+# }
+# high_stocks = {stock for stock in stocks.items() if stock[1] > 100}
+# print(high_stocks)
+# stock2 = {key: value for key, value in stocks.items() if value > 100}
+# print(stock2)
+# stock3 = {key: value for key, value in sorted(
+#     stocks.items(), key=lambda item: item[1], reverse=True) if value > 100}
+# print(stock3)
+# sorted_stocks = dict(sorted(stocks.items(), key=lambda x: x[1], reverse=True))
+# print(sorted_stocks)
