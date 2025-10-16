@@ -1,9 +1,12 @@
+import re
 import random
 import string
 import math
 import operator
 import time
 import functools
+import json
+import csv
 
 
 # # # 1. 素数
@@ -210,9 +213,9 @@ import functools
 # # 10. 查找一句话中每个字母出现字数，从高到低排序
 # message = 'Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.'
 # counter = {}
-# for letter in message:
-#     if 'A' <= letter <= 'Z' or 'a' <= letter <= 'z':
-#         counter[letter] = counter.get(letter, 0) + 1
+# for char in message:
+#     if 'A' <= char <= 'Z' or 'a' <= char <= 'z':
+#         counter[char] = counter.get(char, 0) + 1
 # # sorted_keys = sorted(counter, key=counter.get, reverse=True)
 # # print(sorted_keys)
 # # for key in sorted_keys:
@@ -336,3 +339,114 @@ import functools
 
 # for i in range(1, 51):
 #     print(fib(i))
+
+
+##### -----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~#####
+# # 14. pillow package to handle image in Python
+# from PIL import Image
+# from PIL import ImageFilter
+
+# image = Image.open('Rabbit.jpeg')
+# print(image.format)
+# print(image.size)
+# print(image.mode)
+# # image.thumbnail((128, 128))
+# # image.show()
+# image.filter(ImageFilter.CONTOUR).show()
+# # image.crop((80, 20, 310, 360)).show()
+
+
+##### -----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~#####
+# # 15. 正则表达式 re module
+
+# username = input('请输入用户名: ')
+# qq = input('请输入QQ号: ')
+# m1 = re.match(r'^[0-9a-zA-Z_]{6,20}$', username)
+# if not m1:
+#     print('请输入有效的用户名.')
+# m2 = re.fullmatch(r'[1-9]\d{4,11}', qq)
+# if not m2:
+#     print('请输入有效的QQ号.')
+# if m1 and m2:
+#     print('你输入的信息是有效的!')
+
+# sentence = 'Oh, shit! 你是傻逼吗? Fuck you.'
+# purified = re.sub('fuck|shit|[傻煞沙][比笔逼叉缺吊碉雕]',
+#                   '*', sentence, flags=re.IGNORECASE)
+# print(purified)  # Oh, *! 你是*吗? * you.
+
+
+# poem = '窗前明月光，疑是地上霜。举头望明月，低头思故乡。'
+# sentences_list = re.split(r'[，。]', poem)
+# print(111, sentences_list)
+# # 111 ['窗前明月光', '疑是地上霜', '举头望明月', '低头思故乡', '']
+# # 222 ['窗前明月光', '疑是地上霜', '举头望明月', '低头思故乡']
+# sentences_list = [sentence for sentence in sentences_list if sentence]
+# print(222, sentences_list)
+# for sentence in sentences_list:
+#     print(sentence)
+
+
+##### -----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~#####
+# # 16. 从列表中找出最大的或最小的N个元素
+# import heapq
+
+# list1 = [34, 25, 12, 99, 87, 63, 58, 78, 88, 92]
+# list2 = [
+#     {'name': 'IBM', 'shares': 100, 'price': 91.1},
+#     {'name': 'AAPL', 'shares': 50, 'price': 543.22},
+#     {'name': 'FB', 'shares': 200, 'price': 21.09},
+#     {'name': 'HPQ', 'shares': 35, 'price': 31.75},
+#     {'name': 'YHOO', 'shares': 45, 'price': 16.35},
+#     {'name': 'ACME', 'shares': 75, 'price': 115.65}
+# ]
+# print(heapq.nlargest(3, list1))
+# print(heapq.nsmallest(3, list1))
+# print(heapq.nlargest(2, list2, key=lambda x: x['price']))
+# print(heapq.nsmallest(2, list2, key=lambda x: x['shares']))
+
+
+##### -----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~#####
+# # 16. itertools 模块
+# import itertools
+# # 产生ABCD的全排列
+# permutation = itertools.permutations('ABCD')
+# result = [item for item in permutation]
+# print(result)
+# # 产生ABCDE的五选三组合
+# c5_3 = itertools.combinations('ABCDE', 3)
+# result = [item for item in c5_3]
+# print(result)
+# # 产生ABCD和123的笛卡尔积
+# di = itertools.product('ABCD', '123')
+# result = [item for item in di]
+# print(result)
+# # 产生ABC的无限循环序列
+# print(itertools.cycle(('A', 'B', 'C')))
+
+
+##### -----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~-----~~~~~#####
+# # 16. collections 模块
+# from collections import deque, namedtuple, Counter
+
+# # deque：双端队列，是列表的替代实现。Python中的列表底层是基于数组来实现的，而deque底层是双向链表
+# queue = deque([1, 2, 3])
+# queue.appendleft('abc')
+# left = queue.popleft()
+
+# # namedtuple：命令元组，它是一个类工厂，接受类型的名称和属性列表来创建一个类。
+# Position = namedtuple('Pos', ['x', 'y', 'z'])
+# pos1 = Position(x=1, y=2, z=3)
+# pos2 = Position(4, 5, 6)
+# # print(pos1 < pos2)
+
+# # Counter：dict的子类，键是元素，值是元素的计数，它的most_common()方法可以帮助我们获取出现频率最高的元素。
+# words = [
+#     'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
+#     'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around',
+#     'the', 'eyes', "don't", 'look', 'around', 'the', 'eyes',
+#     'look', 'into', 'my', 'eyes', "you're", 'under'
+# ]
+# counter = Counter(words)
+# print(counter.most_common(3))
+# # [('eyes', 8), ('the', 5), ('look', 4)] Return list of top 3 frequency words

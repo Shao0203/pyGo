@@ -1,0 +1,5 @@
+transaction_id,product_id,price
+001,book,100
+002,car,10000
+003,apple,5
+004,bed,500
